@@ -9,8 +9,6 @@ var greenTooltipActive = false;
 var lastAnalysis = [];
 var updateCount = 0;
 var s;
-window['setTimeout'](stayed30Secs, 30000);
-window['setTimeout'](stayed120Secs, 120000);
 updateAll();
 $('#btn-edit')['button']('toggle');
 $('body')['on']('load', function() {
@@ -47,10 +45,7 @@ $('#editor')['keydown'](function(_0x2c3axc) {
 $('#editor')['on']('paste', function() {
   if (writeState == 'edit') {
     window['setTimeout'](updateAll, 110);
-    ga('send', 'event', 'UI', 'Text Pasted', 'Pasted in Edit Mode');
-  } else {
-    ga('send', 'event', 'UI', 'Text Pasted', 'Pasted in Write Mode');
-  };
+  }
   window['setTimeout'](scaleTextBoxes, 30);
   scrollFix();
 });
@@ -65,7 +60,6 @@ $('#btn-write')['on']('click', function() {
     $('#editor')['delay'](50)['focus']();
     $('#editor')['scrollTop'](_0x2c3ax12);
     $('#editor')['css']('opacity', 1);
-    ga('send', 'event', 'UI', 'Write Button Clicked');
   };
 });
 $('#btn-edit')['on']('click', function() {
@@ -79,77 +73,66 @@ $('#btn-edit')['on']('click', function() {
     $('#editor')['delay'](50)['focus']();
     $('#editor')['scrollTop'](_0x2c3ax12);
     $('#editor')['css']('opacity', 0.6);
-    ga('send', 'event', 'UI', 'Edit Button Clicked');
   };
 });
 $('#yellowSentenceOn')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     yellowSentenceState = 'on';
     showYellowSentences();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Yellow Sentences turned on');
   };
 });
 $('#yellowSentenceOff')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     yellowSentenceState = 'off';
     hideYellowSentences();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Yellow Sentences turned off');
   };
 });
 $('#redSentenceOn')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     redSentenceState = 'on';
     showRedSentences();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Red Sentences turned on');
   };
 });
 $('#redSentenceOff')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     redSentenceState = 'off';
     hideRedSentences();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Red Sentences turned off');
   };
 });
 $('#adverbsOn')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     adverbState = 'on';
     showAdverbs();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Adverbs turned on');
   };
 });
 $('#adverbsOff')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     adverbState = 'off';
     hideAdverbs();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Adverbs turned off');
   };
 });
 $('#stuffyOn')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     stuffyState = 'on';
     showStuffy();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Stuffy Phrases turned on');
   };
 });
 $('#stuffyOff')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     stuffyState = 'off';
     hideStuffy();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Stuffy Phrases turned off');
   };
 });
 $('#passiveOn')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     passiveState = 'on';
     showPassive();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Passive Voice turned on');
   };
 });
 $('#passiveOff')['on']('click', function() {
   if (!$(this)['hasClass']('active')) {
     passiveState = 'off';
     hidePassive();
-    ga('send', 'event', 'UI', 'Overlay Toggled', 'Passive Voice turned on');
   };
 });
 $('#yellowSentenceContainer')['hover'](showYellowToggle, hideYellowToggle);
@@ -160,27 +143,6 @@ $('#passiveContainer')['hover'](showPassiveToggle, hidePassiveToggle);
 $('#editor')['mousemove'](checkHover);
 $('.more-info')['tooltip']();
 $('#readability-mark')['popover']();
-$('#readability-mark')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Readability Explained');
-});
-$('#yellowMoreInfo')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Yellow Tools Explained');
-});
-$('#redMoreInfo')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Red Sentences Explained');
-});
-$('#adverbMoreInfo')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Adverbs Explained');
-});
-$('#stuffyMoreInfo')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Wordy Phrases Explained');
-});
-$('#passiveMoreInfo')['on']('mouseover', function() {
-  ga('send', 'event', 'UI', 'Right Explanation Hovers', 'Passives Explained');
-});
-$('#desktopModal')['on']('show', function() {
-  ga('send', 'event', 'Demand Testing', 'Desktop Version', 'Clicked on desktop version button');
-});
 $('#yesToDesktop')['button']();
 $('#noToDesktop')['button']();
 $('#yesToDesktop')['on']('click', function() {
@@ -189,7 +151,6 @@ $('#yesToDesktop')['on']('click', function() {
   setTimeout(function() {
     _0x2c3ax13['button']('reset');
   }, 3000);
-  ga('send', 'event', 'Demand Testing', 'Desktop Version', 'Voted yes to desktop at 4.99');
   window['location'] = 'email-form.html';
 });
 $('#noToDesktop')['on']('click', function() {
@@ -198,11 +159,7 @@ $('#noToDesktop')['on']('click', function() {
   setTimeout(function() {
     _0x2c3ax13['button']('reset');
   }, 3000);
-  ga('send', 'event', 'Demand Testing', 'Desktop Version', 'Voted no to desktop at 4.99');
   window['setTimeout'](closeDesktopModal, 500);
-});
-$('.twitter-share-button')['on']('click', function() {
-  ga('send', 'event', 'Demand Testing', 'Tweet Button Clicked');
 });
 
 function scaleTextBoxes() {
@@ -240,12 +197,7 @@ function updateAll() {
   var _0x2c3ax1b = updateCount % 10;
   if (updateCount == 4) {
     var _0x2c3ax1c = 'Grade ' + _0x2c3ax1a[4];
-    ga('send', 'event', 'Words and Readability', 'Updates', _0x2c3ax1c, _0x2c3ax1a[1]);
-  } else {
-    if (_0x2c3ax1b == 0) {
-      ga('send', 'event', 'Words and Readability', 'Updates', _0x2c3ax1c, _0x2c3ax1a[1]);
-    };
-  };
+  }
 };
 
 function clearAll() {
@@ -765,11 +717,3 @@ function showGreenTooltip(_0x2c3ax8b, _0x2c3ax84) {
 function hideTooltip(_0x2c3ax84) {
   $(_0x2c3ax84)['tooltip']('destroy');
 };
-
-function stayed30Secs() {
-  ga('send', 'event', 'UI', 'Stayed', 'Stayed 30 Seconds');
-};
-
-function stayed120Secs() {
-  ga('send', 'event', 'UI', 'Stayed', 'Stayed 120 Seconds');
-}
